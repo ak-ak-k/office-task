@@ -1,0 +1,74 @@
+<div class="d-flex" style="color: white">
+  <div class="col-md-4 mt-5 ms-4">
+    <h3 class="mb-5">Task Form</h3>
+
+    <div class="mb-3">
+      <label class="form-label">Employees</label>
+      <select [(ngModel)]="tasks.employee" class="form-control">
+        <option value="">Open this select menu</option>
+        <option value="{{ item.name }}" *ngFor="let item of gs.employees">
+          {{ item.name }}
+        </option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Task</label>
+      <input [(ngModel)]="tasks.task" type="text" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Date</label>
+      <input [(ngModel)]="tasks.date" type="text" class="form-control" />
+    </div>
+
+    <div class="d-flex justify-content-between mt-4">
+      <button type="submit" (click)="add()" class="btn btn-outline-light">
+        Add
+      </button>
+      <button type="submit" (click)="update()" class="btn btn-outline-light">
+        Update
+      </button>
+    </div>
+  </div>
+
+  <div class="col-md-7 mt-5 ms-5">
+    <h3 class="mb-5">Tasks Lists</h3>
+    <table class="table table-dark table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Name</th>
+          <th scope="col">Task</th>
+          <th scope="col">Date</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of array; let i = index">
+          <th scope="row">{{ item.id }}</th>
+          <td>{{ item.employee }}</td>
+          <td>{{ item.task }}</td>
+          <td>{{ item.date }}</td>
+          <td>
+            <button
+              type="submit"
+              class="btn btn-outline-light btn-sm"
+              routerLink="/tasks"
+              [queryParams]="{ id: item.id }"
+            >
+              Edit
+            </button>
+            <button
+              type="submit"
+              (click)="delete(i)"
+              class="btn btn-outline-light btn-sm ms-2"
+            >
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
